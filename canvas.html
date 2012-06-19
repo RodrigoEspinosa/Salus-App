@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html leng="es">
+<head>
+<title>Probando Canvas</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jcanvas.min.js"></script>
+<style>
+#c:hover{
+	cursor: crosshair;
+}
+#rightSide{
+	display: inline-block;
+}
+</style>
+<script>
+var size = 50;
+var color = "blue";
+$()
+$(document).on("mousemove", function(e){
+	console.log(typeof $("#setSize").val());
+	if(typeof $("#setSize").val() == "number"){
+		size = $("#setSize").val();
+	}else{
+		size = 50;
+	}
+	if (e.which === 0){
+
+	}else{
+		$("#c").drawArc({
+		  fillStyle: color,
+		  x: e.pageX, y: e.pageY,
+		  radius: size
+		});
+	}
+});
+$("#setYellow").click(function(){
+	color = "Yellow";
+});
+// $(document).on("mousedown", function(f){
+// 	console.log(f.pageX+"*");
+// 	console.log(f.pageY+"*");
+// 	$("#c").on("mousedown", function(e){
+// 		console.log(e.pageX);
+// 		console.log(e.pageY);
+// 		$(this).drawArc({
+// 			fillStyle: "#333", 
+// 			x: e.pageX, y: e.pageY,
+// 			radius: 1
+// 		});
+// 	});
+// });
+</script>
+</head>
+<body>
+	<canvas id="c" width="500" height="400" style="border:solid 1px #000000;"></canvas>
+	<div id="rightSide">
+		<div id="colores">
+			<span>Colores:</span>
+			<a class="setColor" id="setYellow" href="#">Amarrillo</a>
+			<a class="setColor" id="setBlue" href="#">Azul</a>
+			<a class="setColor" id="setWhite" href="#">Blanco</a>
+		<div>
+		<div id="size">
+			<span>Tamaño</span>
+			<input id="setSize" value="50"/>
+		</div>
+	</div>
+</body>
+</html>
