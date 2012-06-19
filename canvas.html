@@ -13,9 +13,25 @@
 }
 </style>
 <script>
-var size = 50;
-var color = "blue";
-$()
+function main = {
+	var size, 
+	var color,
+	setDefaults: function(){
+		main.size = 50;
+		main.color= "blue";
+	},
+	setColor: function(color){
+
+	},
+	setSize: function(size){
+		
+	}
+};
+$("#setYellow").click(function(){
+	main.setColor("Yellow");
+});
+// setYellow.prototype.main = function(){	
+// }
 $(document).on("mousemove", function(e){
 	console.log(typeof $("#setSize").val());
 	if(typeof $("#setSize").val() == "number"){
@@ -32,9 +48,6 @@ $(document).on("mousemove", function(e){
 		  radius: size
 		});
 	}
-});
-$("#setYellow").click(function(){
-	color = "Yellow";
 });
 // $(document).on("mousedown", function(f){
 // 	console.log(f.pageX+"*");
