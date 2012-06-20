@@ -5,6 +5,10 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="jcanvas.min.js"></script>
 <style>
+#c{
+	border:solid 1px #000000;
+	display: none;
+}
 #c:hover{
 	cursor: crosshair;
 }
@@ -13,70 +17,65 @@
 }
 </style>
 <script>
-function main = {
-	var size, 
-	var color,
-	setDefaults: function(){
-		main.size = 50;
-		main.color= "blue";
-	},
+var main = {
+	img: 0,
+	size: 50,
+	color: "blue",
 	setColor: function(color){
-
+		this.color = color;
 	},
 	setSize: function(size){
 		
 	}
 };
-$("#setYellow").click(function(){
-	main.setColor("Yellow");
+$(document).on("mousedown", function(e){
+	e.preventDefault();
 });
-// setYellow.prototype.main = function(){	
-// }
 $(document).on("mousemove", function(e){
-	console.log(typeof $("#setSize").val());
-	if(typeof $("#setSize").val() == "number"){
-		size = $("#setSize").val();
-	}else{
-		size = 50;
-	}
 	if (e.which === 0){
-
+		
 	}else{
 		$("#c").drawArc({
-		  fillStyle: color,
+		  fillStyle: main.color,
 		  x: e.pageX, y: e.pageY,
-		  radius: size
+		  radius: main.size
 		});
 	}
 });
-// $(document).on("mousedown", function(f){
-// 	console.log(f.pageX+"*");
-// 	console.log(f.pageY+"*");
-// 	$("#c").on("mousedown", function(e){
-// 		console.log(e.pageX);
-// 		console.log(e.pageY);
-// 		$(this).drawArc({
-// 			fillStyle: "#333", 
-// 			x: e.pageX, y: e.pageY,
-// 			radius: 1
-// 		});
-// 	});
-// });
+$(document).on("ready", function(){	
+	$("#c").fadeIn();
+	$(".setColor").click(function(e){
+		e.preventDefault();
+		main.setColor($(this).attr("rel"));
+	});
+	$("#clear").on("click", function(){
+		$("#c").clearCanvas();
+	});
+	$("#save").on("click", function(){
+		main.img = $("#c").getCanvasImage();
+		window.print(main.img);	
+	});
+	$("#setSize").on("change", function(){
+		main.setSize($(this).val());
+	});
+});
 </script>
 </head>
 <body>
-	<canvas id="c" width="500" height="400" style="border:solid 1px #000000;"></canvas>
+	<canvas id="c" width="500" height="400"></canvas>
 	<div id="rightSide">
 		<div id="colores">
 			<span>Colores:</span>
-			<a class="setColor" id="setYellow" href="#">Amarrillo</a>
-			<a class="setColor" id="setBlue" href="#">Azul</a>
-			<a class="setColor" id="setWhite" href="#">Blanco</a>
+			<a class="setColor" rel="Yellow" href="#">Amarrillo</a>
+			<a class="setColor" rel="Blue" href="#">Azul</a>
+			<a class="setColor" rel="White" href="#">Blanco</a>
 		<div>
 		<div id="size">
 			<span>Tamaño</span>
 			<input id="setSize" value="50"/>
 		</div>
+		<a id="clear" href="#">Dezhacer</a>
+		<a id="save" href="#">Guardar</a>
 	</div>
 </body>
 </html>
